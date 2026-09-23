@@ -1,6 +1,7 @@
 # FICC G10 FX Lectures 2026/27
 
-Structured 1 to 5 week guide on how to trade G10 FX currencies, with set exercises and examples. Click a lecture to view it in your browser.
+Structured 1 to 5 week guide on how to trade G10 FX currencies, with set exercises and examples.
+These are example lectures that we will be doing.
 
 | Week | Lecture |
 |---|---|
