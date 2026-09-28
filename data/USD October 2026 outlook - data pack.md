@@ -70,12 +70,14 @@ Forward = S × (1 + r_quote·t) / (1 + r_base·t), using **policy rates as a pro
 
 | Pair | Spot (date) | Foreign policy rate | Policy gap vs US | 3m fwd | 12m fwd |
 |---|---|---|---|---|---|
-| EUR/USD | 1.1403 (25 Sep close) | ECB deposit 2.25% *(TBC: 10 Sep decision)* | −1.625 pts | 1.1449 | 1.1584 |
+| EUR/USD | 1.1403 (25 Sep close) | ECB deposit 2.50% (hiked 10 Sep) | −1.375 pts | 1.1442 | 1.1556 |
 | USD/JPY | 157.25 (28 Sep) | BoJ 1.25% (hiked 18 Sep) | −2.625 pts | 156.23 | 153.28 |
-| GBP/USD | ~1.3220 (25 Sep) | BoE *TBC* | TBC | TBC | TBC |
-| USD/CHF | 0.8278 (28 Sep) | SNB *TBC* | TBC | TBC | TBC |
+| GBP/USD | ~1.3220 (25 Sep) | BoE 3.75% (held 17 Sep, 6–3 vote; 3 voted to hike) | −0.125 pts | TBC | TBC |
+| USD/CHF | 0.8278 (28 Sep) | SNB 0% (held 24 Sep) | −3.875 pts | TBC | TBC |
 | USD/CAD | 1.4141 (28 Sep) | BoC 2.25% (held 2 Sep) | −1.625 pts | 1.4084 | 1.3920 |
 | AUD/USD | 0.7024 (28 Sep) | RBA *TBC* (meets 29 Sep) | TBC | TBC | TBC |
+
+**DXY basket comparison.** Weighting each foreign policy rate by its DXY share (EUR 57.6%, JPY 13.6%, GBP 11.9%, CAD 9.1%, SEK 4.2% at the Riksbank's 1.75%, held 24 Sep, and CHF 3.6%) gives a basket rate of **2.33%**. The Fed is **+1.54 pts** above it. DXY 3m forward ≈ **100.58**.
 
 **Market colour (28 Sep):** EUR/USD is near critical yearly support. USD/JPY slipped below 158.50 on Finance Minister Katayama's comments, with resistance at 159.00 and 160.22. USD/CHF has broken out of a year-long range (technical target 0.8365). USD/CAD looks stretched (resistance 1.4153 and 1.4291). AUD/USD is defending 0.7000, its lowest since 4 August.
 

@@ -26,15 +26,17 @@
   \end{outlook}%
 }{%
   \begin{indicators}
-    \indicator{DXY (25 Sep close)}{100.97}
+    % Comparisons are against the DXY basket: EUR 57.6%, JPY 13.6%, GBP 11.9%,
+    % CAD 9.1%, SEK 4.2%, CHF 3.6%. Weighted policy rate = 2.33% (28 Sep 2026).
+    \indicator{DXY spot (25 Sep)}{100.97}
+    \indicator{DXY 3m forward}{\fxforward[2]{100.97}{3.875}{2.3345}{0.25}}
     \indicator{Fed funds (16 Sep)}{3.75--4.00\%}
-    \indicator{Next FOMC \textperiodcentered{} priced}{28 Oct \textperiodcentered{} +18bp}
-    \indicator{2y Treasury (25 Sep)}{[4.81\%] verify}
-    \indicator{10y Treasury (16 Sep)}{5.02\%}
-    \indicator{CPI / core, Aug}{3.4\% / [2.4\%]}
-    \indicator{Real policy rate}{+0.5\%}
-    \indicator{Payrolls / unemp., Aug}{+162k / 4.1\%}
-    \indicator{REER (BIS, May)}{114.0}
+    \indicator{Policy gap vs DXY basket}{+1.54 pts}
+    \indicator{Next FOMC \textperiodcentered{} priced}{28 Oct: 72\%}
+    \indicator{2y Treasury; 1m chg}{[4.81\%] \textperiodcentered{} +47bp}
+    \indicator{Real policy rate (US)}{+0.5\%}
+    \indicator{CPI vs 2\% target (Aug)}{3.4\% (+1.4 pts)}
+    \indicator{Valuation: REER (May)}{114.0}
     \lastindicator{CFTC DXY net (22 Sep)}{+10,330}
   \end{indicators}%
 }
@@ -75,7 +77,7 @@
     \traderow{Entry}{\texttt{1.1400}}
     \traderow{Stop}{\texttt{1.1550}}
     \traderow{Target}{\texttt{1.1100}}
-    \traderow{Reward : risk}{\texttt{2.0} before carry \textperiodcentered{} \texttt{2.3} after (+46 pips)}
+    \traderow{Reward : risk}{\texttt{2.0} before carry \textperiodcentered{} \texttt{2.3} after (+39 pips)}
     \traderow{Size}{1\% of book \textperiodcentered{} $\sim$EUR 667k}
     \traderow{Catalysts}{2 Oct payrolls \textperiodcentered{} 14 Oct CPI \textperiodcentered{} 28 Oct FOMC}
     \lasttraderow{Horizon}{Small, short dated; exit after 28 Oct if flat}
@@ -102,12 +104,12 @@
 %% Forecasts against the forward ----------------------------------------------
 %% Forwards are calculated live from spot and policy rates with \fxforward.
 \begin{forecasts}
-  \forecastrow{EUR/USD}{3 months}{1.1403}{\fxforward{1.1403}{2.25}{3.875}{0.25}}{1.1200}{\textbf{USD stronger} than the forward}
-  \forecastrow{EUR/USD}{12 months}{1.1403}{\fxforward{1.1403}{2.25}{3.875}{1}}{1.1600}{In line with the forward}
+  \forecastrow{EUR/USD}{3 months}{1.1403}{\fxforward{1.1403}{2.50}{3.875}{0.25}}{1.1200}{\textbf{USD stronger} than the forward}
+  \forecastrow{EUR/USD}{12 months}{1.1403}{\fxforward{1.1403}{2.50}{3.875}{1}}{1.1600}{In line with the forward}
   \forecastrow{USD/JPY}{3 / 12 months}{157.25}{\fxforward[2]{157.25}{3.875}{1.25}{0.25} / \fxforward[2]{157.25}{3.875}{1.25}{1}}{[\,] / [\,]}{From the JPY page}
   \lastforecastrow{USD/CAD}{3 / 12 months}{1.4141}{\fxforward{1.4141}{3.875}{2.25}{0.25} / \fxforward{1.4141}{3.875}{2.25}{1}}{[\,] / [\,]}{From the CAD page}
 \end{forecasts}
 
-\sourcesnote{Forwards from spot and policy rates as a proxy (USD 3.875\%, EUR 2.25\%, JPY 1.25\%, CAD 2.25\%). Sources: Federal Reserve, BLS, BEA, CME FedWatch, CFTC, BIS/FRED, Portfolio Terminal, CNBC; data 16--28 Sep 2026. Values in [brackets] to be verified or completed. Student research for teaching purposes; not investment advice.}
+\sourcesnote{Forwards from spot and policy rates as a proxy (USD 3.875\%, EUR 2.50\%, GBP 3.75\%, CHF 0\%, SEK 1.75\%, JPY 1.25\%, CAD 2.25\%; DXY-weighted basket 2.33\%). Sources: Federal Reserve, ECB, BoE, SNB, Riksbank, BLS, BEA, CME FedWatch, CFTC, BIS/FRED, Portfolio Terminal, CNBC; data 16--28 Sep 2026. Values in [brackets] to be verified or completed. Student research for teaching purposes; not investment advice.}
 
 \end{document}
