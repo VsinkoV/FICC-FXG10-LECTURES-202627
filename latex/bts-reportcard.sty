@@ -158,7 +158,7 @@
 \newcommand\reportrow[2]{%
   \noindent
   \begin{minipage}[t]{0.575\linewidth}\vspace{0pt}#1\end{minipage}\hfill
-  \begin{minipage}[t]{0.395\linewidth}\vspace{0pt}#2\end{minipage}\par\vspace{11pt}}
+  \begin{minipage}[t]{0.395\linewidth}\vspace{0pt}#2\end{minipage}\par\vspace{8pt}}
 
 %% Outlook box: \begin{outlook}{1 to 3 month outlook}{Headline claim} ... \end{outlook}
 \newenvironment{outlook}[2]
@@ -170,7 +170,7 @@
   {\begin{tcolorbox}[colback=btspanel,colframe=btspanel,arc=2pt,boxrule=0pt,
      left=7pt,right=7pt,top=6pt,bottom=4pt]
    \btslabel{Indicators panel}\par\vspace{4pt}\footnotesize
-   \renewcommand\arraystretch{1.32}%
+   \renewcommand\arraystretch{1.22}%
    \begin{tabular}{@{}>{\leavevmode\color{btsmuted}}p{0.56\linewidth}>{\raggedleft\arraybackslash\ttfamily}p{0.42\linewidth}@{}}}
   {\end{tabular}\end{tcolorbox}}
 \newcommand\indicator[2]{#1 & #2 \\ \arrayrulecolor{btsrule}\hline}
@@ -212,8 +212,8 @@
    \btslabel{Forecasts against the forward}\par\vspace{3pt}\small
    \renewcommand\arraystretch{1.35}%
    \begin{tabular}{@{}p{16mm} p{22mm} >{\raggedleft\arraybackslash\ttfamily}p{17mm}
-      >{\raggedleft\arraybackslash\ttfamily}p{27mm} >{\raggedleft\arraybackslash\ttfamily\bfseries}p{22mm}
-      @{\hspace{6mm}}p{62mm}@{}}
+      >{\raggedleft\arraybackslash\ttfamily}p{33mm} >{\raggedleft\arraybackslash\ttfamily\bfseries}p{22mm}
+      @{\hspace{6mm}}p{56mm}@{}}
    {\color{btsmuted}Pair} & {\color{btsmuted}Horizon} & {\color{btsmuted}\sffamily\mdseries Spot} &
    {\color{btsmuted}\sffamily\mdseries Forward} & {\color{btsmuted}\sffamily\mdseries Our forecast} &
    {\color{btsmuted}Against the forward} \\ \arrayrulecolor{btsink}\hline}
