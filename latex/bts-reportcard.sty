@@ -1,0 +1,243 @@
+%% bts-reportcard.sty
+%% Bristol Trading Society, FICC G10 FX: one-page Currency Report Card.
+%% Layout follows the lecture template: header, 1-3m outlook + indicators,
+%% 6-12m outlook + chart 1, trade idea + chart 2, forecasts against the forward.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bts-reportcard}[2026/09/28 v1.0 BTS Currency Report Card]
+
+%% ---------------------------------------------------------------------------
+%% Options: accent colour (red is University of Bristol red)
+%% ---------------------------------------------------------------------------
+\newcommand\bts@accentname{bristolred}
+\DeclareOption{red}{\renewcommand\bts@accentname{bristolred}}
+\DeclareOption{olive}{\renewcommand\bts@accentname{bristololive}}
+\DeclareOption{ink}{\renewcommand\bts@accentname{btsink}}
+\ProcessOptions\relax
+
+%% ---------------------------------------------------------------------------
+%% Packages
+%% ---------------------------------------------------------------------------
+\RequirePackage[a4paper,margin=13mm,top=11mm,bottom=11mm]{geometry}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{colortbl}
+\RequirePackage{microtype}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\RequirePackage{textcomp}
+
+%% Fonts: IBM Plex Sans/Mono + Source Serif Pro when installed (Overleaf has
+%% them); otherwise Helvetica/Courier + Times so it always compiles.
+\IfFileExists{plex-sans.sty}
+  {\RequirePackage[sfdefault]{plex-sans}}
+  {\RequirePackage[scaled=0.92]{helvet}\renewcommand\familydefault{\sfdefault}}
+\IfFileExists{plex-mono.sty}
+  {\RequirePackage[scale=0.9]{plex-mono}}
+  {\renewcommand\ttdefault{pcr}}
+\IfFileExists{sourceserifpro.sty}
+  {\newcommand\bts@serif{\fontfamily{SourceSerifPro-TLF}\selectfont}}
+  {\newcommand\bts@serif{\fontfamily{ptm}\selectfont}}
+
+%% ---------------------------------------------------------------------------
+%% Colours (University of Bristol palette)
+%% ---------------------------------------------------------------------------
+\definecolor{bristolred}{HTML}{AB1F2D}
+\definecolor{bristololive}{HTML}{536A2B}
+\definecolor{bristollime}{HTML}{C4D600}
+\definecolor{btsink}{HTML}{262626}
+\definecolor{btsmuted}{HTML}{595959}
+\definecolor{btsrule}{HTML}{D9D9D9}
+\definecolor{btspanel}{HTML}{F3F3F3}
+\definecolor{btsdarkrule}{HTML}{474747}
+\definecolor{btssoft}{HTML}{D0D0D0}
+\colorlet{accent}{\bts@accentname}
+
+\color{btsink}
+\setlength\parindent{0pt}
+\pagestyle{empty}
+
+%% ---------------------------------------------------------------------------
+%% Metadata setters
+%% ---------------------------------------------------------------------------
+\newcommand\bts@currency{Currency}
+\newcommand\bts@subtitle{}
+\newcommand\bts@analyst{[ANALYST NAME]}
+\newcommand\bts@asof{[DATE]}
+\newcommand\bts@issue{[N]}
+\newcommand\bts@tactical{[VIEW]}
+\newcommand\bts@structural{[VIEW]}
+\newcommand\bts@logo{bts-logo}
+\newcommand\bts@uoblogo{uob-logo}
+\newcommand\bts@kicker{FICC \textperiodcentered{} G10 FX}
+\newcommand\bts@kickerright{Currency Report Card \textperiodcentered{} House view}
+
+\newcommand\currency[1]{\renewcommand\bts@currency{#1}}
+\newcommand\subtitle[1]{\renewcommand\bts@subtitle{#1}}
+\newcommand\analyst[1]{\renewcommand\bts@analyst{#1}}
+\newcommand\asof[1]{\renewcommand\bts@asof{#1}}
+\newcommand\issue[1]{\renewcommand\bts@issue{#1}}
+\newcommand\tacticalview[1]{\renewcommand\bts@tactical{#1}}
+\newcommand\structuralview[1]{\renewcommand\bts@structural{#1}}
+\newcommand\logo[1]{\renewcommand\bts@logo{#1}}
+\newcommand\uoblogo[1]{\renewcommand\bts@uoblogo{#1}}
+\newcommand\kicker[2]{\renewcommand\bts@kicker{#1}\renewcommand\bts@kickerright{#2}}
+
+%% ---------------------------------------------------------------------------
+%% Small building blocks
+%% ---------------------------------------------------------------------------
+% Letter-spaced uppercase label
+\newcommand\btslabel[2][accent]{%
+  {\color{#1}\footnotesize\bfseries\textls[140]{\MakeUppercase{#2}}}}
+% Section heading with a hairline under it
+\newcommand\btssection[1]{%
+  \btslabel{#1}\par\vspace{2pt}{\color{btsrule}\hrule height 0.5pt}\vspace{5pt}}
+% Serif headline sentence (the claim)
+\newcommand\headline[1]{{\bts@serif\bfseries\large #1\par}\vspace{4pt}}
+% Bold lead-in for a point: \point{Priced}{text}
+\newcommand\point[2]{\textbf{#1:} #2\enspace}
+% Monospaced figure
+\newcommand\num[1]{\texttt{#1}}
+% Driver tags: positive (filled) and negative (outlined)
+\newcommand\drivertagpos[1]{%
+  \tcbox[on line,colback=btsink,colframe=btsink,coltext=white,
+    boxrule=0pt,arc=1.5pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt,
+    fontupper=\scriptsize]{#1}}
+\newcommand\drivertagneg[1]{%
+  \tcbox[on line,colback=white,colframe=btsink,coltext=btsink,
+    boxrule=0.5pt,arc=1.5pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt,
+    fontupper=\scriptsize]{#1}}
+
+%% ---------------------------------------------------------------------------
+%% Header
+%% ---------------------------------------------------------------------------
+\newcommand\bts@badge[3]{% #1 filled?, #2 label, #3 view
+  \ifx#1y%
+    \begin{tcolorbox}[colback=accent,colframe=accent,coltext=white,
+      width=\linewidth,arc=2pt,boxrule=0pt,left=6pt,right=6pt,top=4pt,bottom=4pt]
+      {\color{btssoft}\scriptsize\textls[120]{\MakeUppercase{#2}}}\par
+      {\bts@serif\bfseries\Large #3}
+    \end{tcolorbox}%
+  \else
+    \begin{tcolorbox}[colback=white,colframe=btsink,coltext=btsink,
+      width=\linewidth,arc=2pt,boxrule=0.7pt,left=6pt,right=6pt,top=4pt,bottom=4pt]
+      {\color{btsmuted}\scriptsize\textls[120]{\MakeUppercase{#2}}}\par
+      {\bts@serif\bfseries\Large #3}
+    \end{tcolorbox}%
+  \fi}
+
+\newcommand\makereportheader{%
+  \noindent
+  \begin{minipage}[c]{0.5\linewidth}
+    \IfFileExists{\bts@logo.png}{\includegraphics[height=22mm,trim=12 20 12 20,clip]{\bts@logo}}{%
+      \IfFileExists{\bts@logo.pdf}{\includegraphics[height=19mm]{\bts@logo}}{\fbox{\small[LOGO]}}}%
+    \hspace{4pt}\raisebox{8mm}{\btslabel[btsmuted]{\bts@kicker}}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.45\linewidth}\raggedleft
+    \IfFileExists{\bts@uoblogo.png}{\includegraphics[height=11mm]{\bts@uoblogo}}{\fbox{\small[UNIVERSITY LOGO]}}\par\vspace{3pt}
+    \btslabel[btsmuted]{\bts@kickerright}
+  \end{minipage}\par\vspace{4pt}
+  \noindent
+  \begin{minipage}[b]{0.6\linewidth}
+    {\bts@serif\bfseries\fontsize{34}{36}\selectfont \bts@currency\par}\vspace{3pt}
+    {\bts@serif\color{accent}\large \bts@subtitle\par}\vspace{3pt}
+    {\color{btsmuted}\small Analyst: \bts@analyst{} \textperiodcentered{} Data as of \bts@asof{} \textperiodcentered{} Issue \bts@issue\par}
+  \end{minipage}\hfill
+  \begin{minipage}[b]{0.37\linewidth}
+    \begin{minipage}[b]{0.485\linewidth}\bts@badge{y}{1 to 3 months}{\bts@tactical}\end{minipage}\hfill
+    \begin{minipage}[b]{0.485\linewidth}\bts@badge{n}{6 to 12 months}{\bts@structural}\end{minipage}
+  \end{minipage}\par\vspace{6pt}
+  {\color{btsink}\hrule height 1.6pt}\vspace{10pt}}
+
+%% ---------------------------------------------------------------------------
+%% Page rows: \reportrow{left 57%}{right 40%}
+%% ---------------------------------------------------------------------------
+\newcommand\reportrow[2]{%
+  \noindent
+  \begin{minipage}[t]{0.575\linewidth}\vspace{0pt}#1\end{minipage}\hfill
+  \begin{minipage}[t]{0.395\linewidth}\vspace{0pt}#2\end{minipage}\par\vspace{11pt}}
+
+%% Outlook box: \begin{outlook}{1 to 3 month outlook}{Headline claim} ... \end{outlook}
+\newenvironment{outlook}[2]
+  {\btssection{#1}\headline{#2}\small\linespread{1.12}\selectfont}
+  {\par}
+
+%% Indicators panel
+\newenvironment{indicators}
+  {\begin{tcolorbox}[colback=btspanel,colframe=btspanel,arc=2pt,boxrule=0pt,
+     left=7pt,right=7pt,top=6pt,bottom=4pt]
+   \btslabel{Indicators panel}\par\vspace{4pt}\footnotesize
+   \renewcommand\arraystretch{1.32}%
+   \begin{tabular}{@{}>{\leavevmode\color{btsmuted}}p{0.56\linewidth}>{\raggedleft\arraybackslash\ttfamily}p{0.42\linewidth}@{}}}
+  {\end{tabular}\end{tcolorbox}}
+\newcommand\indicator[2]{#1 & #2 \\ \arrayrulecolor{btsrule}\hline}
+\newcommand\lastindicator[2]{#1 & #2 \\}
+
+%% Chart box: \begin{chartbox}{Chart 1}{Claim as title}{Source caption} tikz \end{chartbox}
+\newenvironment{chartbox}[3]
+  {\def\bts@caption{#3}%
+   \btslabel{#1}\par\vspace{2pt}{\bts@serif\bfseries\normalsize #2\par}\vspace{3pt}\centering}
+  {\par\vspace{2pt}\raggedright{\color{btsmuted}\scriptsize\bts@caption\par}}
+
+%% Shared pgfplots style for charts
+\pgfplotsset{btschart/.style={
+  width=0.97\linewidth, height=40mm,
+  axis lines=left, axis line style={btsrule},
+  ymajorgrids, grid style={btsrule},
+  tick style={draw=none},
+  ticklabel style={font=\scriptsize\ttfamily, text=btsmuted},
+  every axis plot/.append style={btsink, line width=1.2pt},
+  enlarge x limits=0.06,
+  nodes near coords style={font=\scriptsize\ttfamily, text=btsink},
+}}
+
+%% Trade idea box
+\newenvironment{tradeidea}[1]
+  {\begin{tcolorbox}[colback=btsink,colframe=btsink,coltext=white,arc=2pt,
+     boxrule=0pt,left=9pt,right=9pt,top=7pt,bottom=6pt]
+   \btslabel[bristollime]{Trade idea}\par\vspace{3pt}
+   {\bts@serif\bfseries\Large #1\par}\vspace{5pt}\small
+   \renewcommand\arraystretch{1.3}%
+   \begin{tabular}{@{}>{\leavevmode\color{btssoft}}p{0.27\linewidth}p{0.70\linewidth}@{}}}
+  {\end{tabular}\end{tcolorbox}}
+\newcommand\traderow[2]{#1 & #2 \\ \arrayrulecolor{btsdarkrule}\hline}
+\newcommand\lasttraderow[2]{#1 & #2 \\}
+
+%% Forecasts against the forward
+\newenvironment{forecasts}
+  {\par\vspace{2pt}{\color{btsink}\hrule height 1.6pt}\vspace{7pt}
+   \btslabel{Forecasts against the forward}\par\vspace{3pt}\small
+   \renewcommand\arraystretch{1.35}%
+   \begin{tabular}{@{}p{16mm} p{22mm} >{\raggedleft\arraybackslash\ttfamily}p{17mm}
+      >{\raggedleft\arraybackslash\ttfamily}p{27mm} >{\raggedleft\arraybackslash\ttfamily\bfseries}p{22mm}
+      @{\hspace{6mm}}p{62mm}@{}}
+   {\color{btsmuted}Pair} & {\color{btsmuted}Horizon} & {\color{btsmuted}\sffamily\mdseries Spot} &
+   {\color{btsmuted}\sffamily\mdseries Forward} & {\color{btsmuted}\sffamily\mdseries Our forecast} &
+   {\color{btsmuted}Against the forward} \\ \arrayrulecolor{btsink}\hline}
+  {\end{tabular}}
+\newcommand\forecastrow[6]{#1 & #2 & #3 & #4 & #5 & #6 \\ \arrayrulecolor{btsrule}\hline}
+\newcommand\lastforecastrow[6]{#1 & #2 & #3 & #4 & #5 & #6 \\}
+
+%% Empty chart slot for the blank template:
+%% replace with \includegraphics[width=\linewidth]{mychart} or a pgfplots axis
+\newcommand\chartplaceholder[1][Insert chart here]{%
+  \begin{tcolorbox}[colback=white,colframe=btsrule,boxrule=0.8pt,arc=2pt,
+    height=40mm,valign=center,halign=center,fontupper=\small\color{btsmuted}]
+    #1\par\scriptsize (\texttt{\textbackslash includegraphics} or a \texttt{pgfplots} axis)
+  \end{tcolorbox}}
+
+%% Footnote / sources line
+\newcommand\sourcesnote[1]{\par\vspace{4pt}{\color{btsmuted}\scriptsize\linespread{1.1}\selectfont #1\par}}
+
+%% ---------------------------------------------------------------------------
+%% Forward calculator (Lecture 2): F = S (1 + r_quote t) / (1 + r_base t)
+%% \fxforward[dp]{spot}{r_base %}{r_quote %}{t years}
+%% e.g. EUR/USD 3m: \fxforward{1.1403}{2.25}{3.875}{0.25} -> 1.1449
+%% ---------------------------------------------------------------------------
+\newcommand\fxforward[5][4]{%
+  \pgfmathprintnumber[fixed,fixed zerofill,precision=#1]{\fpeval{round(#2*(1+#4/100*#5)/(1+#3/100*#5),#1)}}}
+
+\endinput

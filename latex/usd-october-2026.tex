@@ -1,0 +1,113 @@
+% US Dollar, October 2026 outlook: Bristol Trading Society Currency Report Card
+% Compile with pdflatex (twice is not needed). Edit the text and numbers below;
+% the look lives in bts-reportcard.sty. Accent options: red (default), olive, ink.
+\documentclass[10pt]{article}
+\usepackage[red]{bts-reportcard}
+
+\currency{US Dollar}
+\subtitle{October 2026 outlook: firm into the FOMC, fraying beyond it}
+\analyst{[ANALYST NAME]}
+\asof{28 Sep 2026}
+\issue{[N]}
+\tacticalview{USD bullish}
+\structuralview{Neutral}
+\logo{bts-logo}
+
+\begin{document}
+\makereportheader
+
+%% Row 1: 1 to 3 month outlook | indicators panel ------------------------------
+\reportrow{%
+  \begin{outlook}{1 to 3 month outlook}{A December hike is underpriced; the dollar stays firm through October.}
+    \point{Priced}{72\% of a 25bp hike on 28 Oct (CME FedWatch, 28 Sep), dots at 4.1\% for year end.}
+    \point{View}{payrolls beat (+162k vs +53k), core CPI +0.3\% m/m and Chair Warsh's ``inflation is too high'' argue for more than one further move.}
+    \point{Positioning}{CFTC DXY longs +10k, near a 3-month low after July's record long was cut: not crowded.}
+    \point{Change our mind}{payrolls under 50k on 2 Oct, a soft 14 Oct CPI, or a hold on 28 Oct.}
+  \end{outlook}%
+}{%
+  \begin{indicators}
+    \indicator{DXY (25 Sep close)}{100.97}
+    \indicator{Fed funds (16 Sep)}{3.75--4.00\%}
+    \indicator{Next FOMC \textperiodcentered{} priced}{28 Oct \textperiodcentered{} +18bp}
+    \indicator{2y Treasury (25 Sep)}{[4.81\%] verify}
+    \indicator{10y Treasury (16 Sep)}{5.02\%}
+    \indicator{CPI / core, Aug}{3.4\% / [2.4\%]}
+    \indicator{Real policy rate}{+0.5\%}
+    \indicator{Payrolls / unemp., Aug}{+162k / 4.1\%}
+    \indicator{REER (BIS, May)}{114.0}
+    \lastindicator{CFTC DXY net (22 Sep)}{+10,330}
+  \end{indicators}%
+}
+
+%% Row 2: 6 to 12 month outlook | chart 1 -------------------------------------
+\reportrow{%
+  \begin{outlook}{6 to 12 month outlook}{The rate premium peaks; valuation and fiscal strain start to bite.}
+    \point{Priced}{a plateau near 4.1\% through 2027, easing to 3.9\% in 2028 (Fed SEP).}
+    \point{Supportive}{positive real rates; net energy exporter with Brent near \$107; safe-haven demand on Iran.}
+    \point{Against}{REER 114, near its record; $\sim$17\% rich to EUR on PPP; a 5\% 10y and Treasury buybacks leaning on yields.}
+    \point{Where we disagree}{the market assumes the Fed can outrun a Treasury capping yields.}
+  \end{outlook}
+  \vspace{4pt}
+  \drivertagpos{Real rates +} \drivertagpos{Terms of trade +} \drivertagpos{Dollar smile +}
+  \drivertagneg{Fiscal $-$} \drivertagneg{Valuation $-$}%
+}{%
+  \begin{chartbox}{Chart 1}{The dollar rallied into the hike, back to July highs}%
+    {DXY daily close. Source: Portfolio Terminal, 25 Sep 2026. Swap in a 1--2 year DXY vs 2y spread chart before publishing.}
+    \begin{tikzpicture}
+      \begin{axis}[btschart,
+          symbolic x coords={21 Sep,22,23,24,25 Sep}, xtick=data,
+          ymin=100.3, ymax=101.45, ytick={100.5,101.0},
+          yticklabel style={/pgf/number format/fixed,/pgf/number format/precision=1,/pgf/number format/fixed zerofill}]
+        \addplot[mark=*, mark size=1.8pt] coordinates
+          {(21 Sep,100.43) (22,100.60) (23,101.10) (24,101.29) (25 Sep,100.97)};
+        \addplot[only marks, mark=*, mark size=3pt, color=accent,
+                 nodes near coords, point meta=explicit symbolic,
+                 nodes near coords style={above, font=\scriptsize\ttfamily}]
+          coordinates {(24,101.29) [101.29]};
+      \end{axis}
+    \end{tikzpicture}
+  \end{chartbox}%
+}
+
+%% Row 3: trade idea | chart 2 -------------------------------------------------
+\reportrow{%
+  \begin{tradeidea}{Sell EUR/USD (long USD), spot}
+    \traderow{Entry}{\texttt{1.1400}}
+    \traderow{Stop}{\texttt{1.1550}}
+    \traderow{Target}{\texttt{1.1100}}
+    \traderow{Reward : risk}{\texttt{2.0} before carry \textperiodcentered{} \texttt{2.3} after (+46 pips)}
+    \traderow{Size}{1\% of book \textperiodcentered{} $\sim$EUR 667k}
+    \traderow{Catalysts}{2 Oct payrolls \textperiodcentered{} 14 Oct CPI \textperiodcentered{} 28 Oct FOMC}
+    \lasttraderow{Horizon}{Small, short dated; exit after 28 Oct if flat}
+  \end{tradeidea}%
+}{%
+  \begin{chartbox}{Chart 2}{The Fed plans to stay high for two years, then ease}%
+    {Fed funds midpoint now vs median projections. Source: FOMC Summary of Economic Projections, 16 Sep 2026.}
+    \begin{tikzpicture}
+      \begin{axis}[btschart,
+          symbolic x coords={Now,2026,2027,2028,2029,Long run}, xtick=data,
+          ymin=3.0, ymax=4.45, ytick={3.5,4.0},
+          yticklabel={\pgfmathprintnumber[fixed,precision=1,fixed zerofill]{\tick}\%},
+          nodes near coords, point meta=explicit symbolic,
+          nodes near coords style={above, font=\scriptsize\ttfamily}]
+        \addplot[dashed, line width=0.8pt, mark=*, mark size=2pt, mark options={solid}]
+          coordinates {(Now,3.875)[3.875] (2026,4.1)[4.1] (2027,4.1)[4.1]
+                       (2028,3.9)[3.9] (2029,3.6)[3.6] (Long run,3.2)[3.2]};
+        \addplot[only marks, mark=*, mark size=3pt, color=accent] coordinates {(Now,3.875)};
+      \end{axis}
+    \end{tikzpicture}
+  \end{chartbox}%
+}
+
+%% Forecasts against the forward ----------------------------------------------
+%% Forwards are calculated live from spot and policy rates with \fxforward.
+\begin{forecasts}
+  \forecastrow{EUR/USD}{3 months}{1.1403}{\fxforward{1.1403}{2.25}{3.875}{0.25}}{1.1200}{\textbf{USD stronger} than the forward}
+  \forecastrow{EUR/USD}{12 months}{1.1403}{\fxforward{1.1403}{2.25}{3.875}{1}}{1.1600}{In line with the forward}
+  \forecastrow{USD/JPY}{3 / 12 months}{157.25}{\fxforward[2]{157.25}{3.875}{1.25}{0.25} / \fxforward[2]{157.25}{3.875}{1.25}{1}}{[\,] / [\,]}{From the JPY page}
+  \lastforecastrow{USD/CAD}{3 / 12 months}{1.4141}{\fxforward{1.4141}{3.875}{2.25}{0.25} / \fxforward{1.4141}{3.875}{2.25}{1}}{[\,] / [\,]}{From the CAD page}
+\end{forecasts}
+
+\sourcesnote{Forwards from spot and policy rates as a proxy (USD 3.875\%, EUR 2.25\%, JPY 1.25\%, CAD 2.25\%). Sources: Federal Reserve, BLS, BEA, CME FedWatch, CFTC, BIS/FRED, Portfolio Terminal, CNBC; data 16--28 Sep 2026. Values in [brackets] to be verified or completed. Student research for teaching purposes; not investment advice.}
+
+\end{document}

@@ -1,0 +1,93 @@
+% BLANK Currency Report Card: Bristol Trading Society, FICC G10 FX
+% Copy this file for your currency, fill in every [BRACKET], compile with pdflatex.
+% Page layout follows the lecture template (Lectures 1 to 5).
+% Accent colour options: red (University of Bristol red, default), olive, ink.
+\documentclass[10pt]{article}
+\usepackage[red]{bts-reportcard}
+
+%% ---- Header -----------------------------------------------------------------
+\currency{[Currency name]}                  % e.g. Euro, Japanese Yen
+\subtitle{[Month Year] outlook: [one-line thesis]}
+\analyst{[ANALYST NAME]}
+\asof{[DD Mon YYYY]}
+\issue{[N]}
+\tacticalview{[View]}                       % 1 to 3 months, e.g. USD bullish
+\structuralview{[View]}                     % 6 to 12 months, e.g. Neutral
+\logo{bts-logo}                             % Bristol Trading Society logo file
+\uoblogo{uob-logo}                          % University of Bristol logo file
+
+\begin{document}
+\makereportheader
+
+%% ---- Row 1: 1 to 3 month outlook | indicators panel (Lectures 2 and 4) -------
+\reportrow{%
+  \begin{outlook}{1 to 3 month outlook}{[Headline claim: what will happen, and why it is not priced.]}
+    \point{Priced}{[What markets price for the next two meetings, with source and date.]}
+    \point{View}{[Your view, backed by numbers: data surprises, central bank signals.]}
+    \point{Positioning}{[CFTC net position and z-score: crowded or not, and does it help or hurt?]}
+    \point{Change our mind}{[The event or level that proves you wrong.]}
+  \end{outlook}%
+}{%
+  \begin{indicators}
+    \indicator{Spot ([date])}{[ ]}
+    \indicator{3m forward}{[ ]}
+    \indicator{Policy rate ([date])}{[ ]}
+    \indicator{Next meeting \textperiodcentered{} priced}{[ ]}
+    \indicator{2y spread vs US; 1m chg}{[ ]}
+    \indicator{Real rate gap}{[ ]}
+    \indicator{CPI vs target}{[ ]}
+    \indicator{Valuation (REER / model z)}{[ ]}
+    \lastindicator{CFTC net position ([date])}{[ ]}
+  \end{indicators}%
+}
+
+%% ---- Row 2: 6 to 12 month outlook | chart 1 (Lecture 3) ----------------------
+\reportrow{%
+  \begin{outlook}{6 to 12 month outlook}{[Headline claim about where the currency ends up over a year.]}
+    \point{Priced}{[Rate path priced a year out (1y OIS / projections).]}
+    \point{Supportive}{[Structural drivers in your favour.]}
+    \point{Against}{[Structural drivers against you.]}
+    \point{Where we disagree}{[Your edge versus the market.]}
+  \end{outlook}
+  \vspace{4pt}
+  % Five structural drivers: use \drivertagpos for supportive, \drivertagneg for against
+  \drivertagpos{[Real rates]} \drivertagpos{[Terms of trade]} \drivertagneg{[Balance of payments]}
+  \drivertagneg{[Valuation]} \drivertagpos{[Dollar cycle]}%
+}{%
+  \begin{chartbox}{Chart 1}{[Title = the claim the chart proves]}{[Source, date]}
+    \chartplaceholder[Chart 1: pair vs 2 year spread]
+    % Example with your own data:
+    % \begin{tikzpicture}\begin{axis}[btschart]
+    %   \addplot coordinates {(1,1.10) (2,1.12) (3,1.11)};
+    % \end{axis}\end{tikzpicture}
+  \end{chartbox}%
+}
+
+%% ---- Row 3: trade idea | chart 2 (Lectures 4 and 5) --------------------------
+\reportrow{%
+  \begin{tradeidea}{[Buy / Sell PAIR], spot}
+    \traderow{Entry}{[level or trigger]}
+    \traderow{Stop}{[level where the view is wrong]}
+    \traderow{Target}{[level]}
+    \traderow{Reward : risk}{[before carry] \textperiodcentered{} [after carry]}
+    \traderow{Size}{1\% of book \textperiodcentered{} [notional]}
+    \traderow{Catalysts}{[dated events]}
+    \lasttraderow{Horizon}{[time stop]}
+  \end{tradeidea}%
+}{%
+  \begin{chartbox}{Chart 2}{[Title = the claim the chart proves]}{[Source, date]}
+    \chartplaceholder[Chart 2: pair vs key driver]
+  \end{chartbox}%
+}
+
+%% ---- Forecasts against the forward (Lecture 5) -------------------------------
+%% Forward calculator: \fxforward[decimals]{spot}{base rate %}{quote rate %}{years}
+%% e.g. EUR/USD 3m: \fxforward{1.1403}{2.25}{3.875}{0.25}  ->  1.1449
+\begin{forecasts}
+  \forecastrow{[PAIR]}{3 months}{[spot]}{[forward]}{[forecast]}{[Higher / lower than the forward, and why]}
+  \lastforecastrow{[PAIR]}{12 months}{[spot]}{[forward]}{[forecast]}{[Higher / lower than the forward, and why]}
+\end{forecasts}
+
+\sourcesnote{Sources: [list sources and dates]. Values in [brackets] to be completed. Student research for teaching purposes; not investment advice.}
+
+\end{document}
