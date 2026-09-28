@@ -17,7 +17,7 @@
 %% ---------------------------------------------------------------------------
 %% Packages
 %% ---------------------------------------------------------------------------
-\RequirePackage[a4paper,margin=13mm,top=11mm,bottom=11mm]{geometry}
+\RequirePackage[a4paper,margin=13mm,top=8mm,bottom=8mm]{geometry}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{xcolor}
@@ -96,9 +96,21 @@
 \newcommand\btssection[1]{%
   \btslabel{#1}\par\vspace{2pt}{\color{btsrule}\hrule height 0.5pt}\vspace{5pt}}
 % Serif headline sentence (the claim)
-\newcommand\headline[1]{{\bts@serif\bfseries\large #1\par}\vspace{4pt}}
-% Bold lead-in for a point: \point{Priced}{text}
-\newcommand\point[2]{\textbf{#1:} #2\enspace}
+\newcommand\headline[1]{{\bts@serif\bfseries\normalsize #1\par}\vspace{3pt}}
+% One answer per row, label column on the left: \point{Priced}{text}
+\newlength\btspointlabelwidth
+\setlength\btspointlabelwidth{16mm}
+\newcommand\point[2]{%
+  \par\noindent
+  \parbox[t]{\btspointlabelwidth}{\raggedright\color{accent}\scriptsize\bfseries
+    \textls[100]{\MakeUppercase{#1}}}%
+  \hspace{3mm}%
+  \parbox[t]{\dimexpr\linewidth-\btspointlabelwidth-3mm\relax}{#2}\par
+  \vspace{1.5pt}{\color{btsrule}\hrule height 0.4pt}\vspace{3pt}}
+% Evidence bullet inside a point: \evidence{Inflation}{CPI 3.4\% ...}
+\newcommand\evidence[2]{%
+  \par\vspace{2pt}\hangindent=3.2mm\hangafter=1\noindent
+  \makebox[3.2mm][l]{\color{accent}\textbullet}\textbf{#1:} #2}
 % Monospaced figure
 \newcommand\num[1]{\texttt{#1}}
 % Driver tags: positive (filled) and negative (outlined)
@@ -132,7 +144,7 @@
 \newcommand\makereportheader{%
   \noindent
   \begin{minipage}[c]{0.5\linewidth}
-    \IfFileExists{\bts@logo.png}{\includegraphics[height=22mm,trim=12 20 12 20,clip]{\bts@logo}}{%
+    \IfFileExists{\bts@logo.png}{\includegraphics[height=19mm,trim=12 20 12 20,clip]{\bts@logo}}{%
       \IfFileExists{\bts@logo.pdf}{\includegraphics[height=19mm]{\bts@logo}}{\fbox{\small[LOGO]}}}%
     \hspace{4pt}\raisebox{8mm}{\btslabel[btsmuted]{\bts@kicker}}
   \end{minipage}\hfill
@@ -142,7 +154,7 @@
   \end{minipage}\par\vspace{4pt}
   \noindent
   \begin{minipage}[b]{0.6\linewidth}
-    {\bts@serif\bfseries\fontsize{34}{36}\selectfont \bts@currency\par}\vspace{3pt}
+    {\bts@serif\bfseries\fontsize{30}{32}\selectfont \bts@currency\par}\vspace{3pt}
     {\bts@serif\color{accent}\large \bts@subtitle\par}\vspace{3pt}
     {\color{btsmuted}\small Analyst: \bts@analyst{} \textperiodcentered{} Data as of \bts@asof{} \textperiodcentered{} Issue \bts@issue\par}
   \end{minipage}\hfill
@@ -184,7 +196,7 @@
 
 %% Shared pgfplots style for charts
 \pgfplotsset{btschart/.style={
-  width=0.97\linewidth, height=40mm,
+  width=0.97\linewidth, height=31mm,
   axis lines=left, axis line style={btsrule},
   ymajorgrids, grid style={btsrule},
   tick style={draw=none},
@@ -199,8 +211,8 @@
   {\begin{tcolorbox}[colback=btsink,colframe=btsink,coltext=white,arc=2pt,
      boxrule=0pt,left=9pt,right=9pt,top=7pt,bottom=6pt]
    \btslabel[bristollime]{Trade idea}\par\vspace{3pt}
-   {\bts@serif\bfseries\Large #1\par}\vspace{5pt}\small
-   \renewcommand\arraystretch{1.3}%
+   {\bts@serif\bfseries\large #1\par}\vspace{3pt}\small
+   \renewcommand\arraystretch{1.12}%
    \begin{tabular}{@{}>{\leavevmode\color{btssoft}}p{0.27\linewidth}p{0.70\linewidth}@{}}}
   {\end{tabular}\end{tcolorbox}}
 \newcommand\traderow[2]{#1 & #2 \\ \arrayrulecolor{btsdarkrule}\hline}
@@ -225,7 +237,7 @@
 %% replace with \includegraphics[width=\linewidth]{mychart} or a pgfplots axis
 \newcommand\chartplaceholder[1][Insert chart here]{%
   \begin{tcolorbox}[colback=white,colframe=btsrule,boxrule=0.8pt,arc=2pt,
-    height=40mm,valign=center,halign=center,fontupper=\small\color{btsmuted}]
+    height=31mm,valign=center,halign=center,fontupper=\small\color{btsmuted}]
     #1\par\scriptsize (\texttt{\textbackslash includegraphics} or a \texttt{pgfplots} axis)
   \end{tcolorbox}}
 
