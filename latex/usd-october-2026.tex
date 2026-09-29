@@ -16,17 +16,34 @@
 \begin{document}
 \makereportheader
 
-%% Row 1: 1 to 3 month outlook | indicators panel ------------------------------
+%% Two flowing columns: LEFT = the argument (both outlooks),
+%% RIGHT = the evidence and the action (indicators, trade, charts).
 \reportrow{%
-  \begin{outlook}{1 to 3 month outlook}{The market underprices a second Fed hike; the dollar stays firm into the 28 Oct FOMC.}
-    \point{Priced}{72\% odds of a 25bp hike on 28 Oct, but only $\sim$30\% for a second by December (CME FedWatch, fed funds futures, 25--28 Sep). Fed median: 4.1\% by year end, one more hike then a pause.}
-    \point{View}{\textbf{Bullish USD:} the Fed hikes more than priced.
-      \evidence{Fed}{16 of 18 officials expect another hike, four see two; the 2026 median rose from 3.8\% to 4.1\% (SEP, 16 Sep).}
+%% 1 to 3 months = EXPECTATIONS: what is priced, data surprises, positioning.
+  \begin{outlook}{1 to 3 month outlook}{Bullish USD: markets are failing to price further Fed hikes.}
+    \point{Priced}{72\% odds of a 25bp hike on 28 Oct ($\approx$+18bp; CME FedWatch, 28 Sep), but only [$\sim$30\%] for a second by December. The Fed's median projects 4.1\% by year end: one more hike, then a pause.}
+    \point{View}{\textbf{The Fed hikes more than priced.}
+      \evidence{Fed}{16 of 18 officials expect another hike; the 2026 median rose from 3.8\% to 4.1\% (SEP, 16 Sep); Warsh: inflation ``too high for too long''.}
       \evidence{Inflation}{CPI 3.4\%, core +0.3\% m/m (BLS, Aug); Brent near \$107; consumers expect 4.6\% (UMich, Sep).}
-      \evidence{Jobs}{payrolls +162k vs +53k expected; unemployment 4.1\% (BLS, Aug): the economy can bear higher rates.}}
-    \point{Positioning}{CFTC DXY net longs +10,330 (22 Sep), near a 3-month low: not crowded, room for buyers.}
-    \point{Change our mind}{Payrolls under 50k (2 Oct), core CPI $\leq$0.2\% m/m (14 Oct), a hold on 28 Oct, or an Iran ceasefire that knocks oil lower.}
-  \end{outlook}%
+      \evidence{Jobs}{payrolls +162k vs +53k expected; unemployment 4.1\% (BLS, Aug): the economy can bear tighter policy.}}
+    \point{Positioning}{DXY net longs +10,330 (CFTC, 22 Sep), z $\approx$ +1: moderately long, not crowded. But euro shorts nearly doubled to $-$52,334: our trade is getting popular.}
+    \point{Change our mind}{Payrolls under 50k (2 Oct) or core CPI $\leq$0.2\% m/m (14 Oct); a hold on 28 Oct; an Iran ceasefire taking Brent below \$90. A dovish surprise could squeeze euro shorts, lifting EUR/USD sharply.}
+  \end{outlook}
+  \vspace{3pt}
+%% 6 to 12 months = FUNDAMENTALS: the five structural drivers (Lecture 3).
+  \begin{outlook}{6 to 12 month outlook}{The rate premium is fully priced; a widening deficit and rich valuation cap the dollar, with El Ni\~no the upside risk.}
+    \point{Priced}{Futures $\sim$4.3\% by December, with hikes into 2027 above the Fed's 4.1\% median (SEP); 5y breakevens at 2.34\% price benign inflation.}
+    \point{View}{\textbf{Two drivers for, two against.}
+      \evidence{Real rates (+)}{+0.5\% real; a 1.54 pt premium over the DXY basket, but priced.}
+      \evidence{Terms of trade (+)}{a super El Ni\~no ($>$90\%, NOAA) hits food importers (JPY) and wheat exporters (AUD) harder than the US.}
+      \evidence{Balance of payments ($-$)}{deficit widened to 3.0\% of GDP (BEA, Q2) as foreign inflows slowed to \$83.7bn in July from \$133.5bn (TIC).}
+      \evidence{Valuation ($-$)}{REER 114, near its record; $\sim$17\% rich to EUR on PPP.}}
+    \point{Where we disagree}{Markets extrapolate hikes into 2027; with 1.5\% growth and a widening deficit, the Fed under-delivers.}
+    \point{Change our mind}{El Ni\~no pushing core PCE above 3.5\% into 2027, forcing the Fed to deliver; or a narrowing deficit.}
+  \end{outlook}
+  \vspace{2pt}
+  \drivertagpos{Real rates +} \drivertagpos{Terms of trade +} \drivertagneg{Balance of payments $-$}
+  \drivertagneg{Valuation $-$} \drivertagneg{Dollar smile $\pm$}%
 }{%
   \begin{indicators}
     % Comparisons are against the DXY basket: EUR 57.6%, JPY 13.6%, GBP 11.9%,
@@ -38,27 +55,42 @@
     \indicator{Policy gap vs EUR (trade)}{+1.375 pts}
     \indicator{Next FOMC \textperiodcentered{} priced}{28 Oct: 72\%}
     \indicator{2y Treasury; 1m chg}{[4.81\%] \textperiodcentered{} +47bp}
-    \indicator{Real policy rate (US)}{+0.5\%}
     \indicator{CPI vs 2\% target (Aug)}{3.4\% (+1.4 pts)}
+    \indicator{Current account (Q2)}{$-$3.0\% of GDP}
     \indicator{Valuation: REER (May)}{114.0}
     \lastindicator{CFTC DXY net (22 Sep)}{+10,330}
-  \end{indicators}%
-}
-
-%% Row 2: 6 to 12 month outlook | chart 1 -------------------------------------
-\reportrow{%
-  \begin{outlook}{6 to 12 month outlook}{The rate premium peaks; valuation and fiscal strain start to bite.}
-    \point{Priced}{A plateau near 4.1\% through 2027, easing to 3.9\% in 2028 (Fed SEP).}
-    \point{Supportive}{Positive real rates; net energy exporter with Brent near \$107; safe-haven demand on Iran.}
-    \point{Against}{REER 114, near its record; $\sim$17\% rich to EUR on PPP; a 5\% 10y and Treasury buybacks leaning on yields.}
-    \point{Where we disagree}{The market assumes the Fed can outrun a Treasury capping yields.}
-  \end{outlook}
-  \vspace{4pt}
-  \drivertagpos{Real rates +} \drivertagpos{Terms of trade +} \drivertagpos{Dollar smile +}
-  \drivertagneg{Fiscal $-$} \drivertagneg{Valuation $-$}%
-}{%
-  \begin{chartbox}{Chart 1}{The dollar rallied into the hike, back to July highs}%
-    {DXY daily close. Source: Portfolio Terminal, 25 Sep 2026. Swap in a 1--2 year DXY vs 2y spread chart before publishing.}
+  \end{indicators}
+  \vspace{3pt}
+%% The trade = direction from 6-12m, timing from 1-3m ("small and short dated").
+  \begin{tradeidea}{Sell EUR/USD (long USD), spot}
+    \traderow{Entry}{\texttt{1.1400}}
+    \traderow{Stop}{\texttt{1.1550}}
+    \traderow{Target}{\texttt{1.1100}}
+    \traderow{Reward : risk}{\texttt{2.0}; \texttt{2.3} after carry}
+    \traderow{Size}{1\% risk; $\sim$EUR 667k}
+    \traderow{Catalysts}{2 Oct NFP, 14 Oct CPI, 28 Oct FOMC}
+    \lasttraderow{Horizon}{Short dated; exit after 28 Oct}
+  \end{tradeidea}
+  \vspace{3pt}
+  \begin{chartbox}{Chart 1}{The Fed's own path shows the rate premium peaking in 2027}%
+    {Fed funds midpoint now vs median projections. Source: FOMC Summary of Economic Projections, 16 Sep 2026.}
+    \begin{tikzpicture}
+      \begin{axis}[btschart,
+          symbolic x coords={Now,2026,2027,2028,2029,Long run}, xtick=data,
+          ymin=3.0, ymax=4.45, ytick={3.5,4.0},
+          yticklabel={\pgfmathprintnumber[fixed,precision=1,fixed zerofill]{\tick}\%},
+          nodes near coords, point meta=explicit symbolic,
+          nodes near coords style={above, font=\scriptsize\ttfamily}]
+        \addplot[dashed, line width=0.8pt, mark=*, mark size=2pt, mark options={solid}]
+          coordinates {(Now,3.875)[3.875] (2026,4.1)[4.1] (2027,4.1)[4.1]
+                       (2028,3.9)[3.9] (2029,3.6)[3.6] (Long run,3.2)[3.2]};
+        \addplot[only marks, mark=*, mark size=3pt, color=accent] coordinates {(Now,3.875)};
+      \end{axis}
+    \end{tikzpicture}
+  \end{chartbox}
+  \vspace{3pt}
+  \begin{chartbox}{Chart 2}{The dollar rallied into the hike, back to July highs}%
+    {DXY daily close. Source: Portfolio Terminal, 25 Sep 2026.}
     \begin{tikzpicture}
       \begin{axis}[btschart,
           symbolic x coords={21 Sep,22,23,24,25 Sep}, xtick=data,
@@ -75,45 +107,14 @@
   \end{chartbox}%
 }
 
-%% Row 3: trade idea | chart 2 -------------------------------------------------
-\reportrow{%
-  \begin{tradeidea}{Sell EUR/USD (long USD), spot}
-    \traderow{Entry}{\texttt{1.1400}}
-    \traderow{Stop}{\texttt{1.1550}}
-    \traderow{Target}{\texttt{1.1100}}
-    \traderow{Reward : risk}{\texttt{2.0} before carry \textperiodcentered{} \texttt{2.3} after (+39 pips)}
-    \traderow{Size}{1\% of book \textperiodcentered{} $\sim$EUR 667k}
-    \traderow{Catalysts}{2 Oct payrolls \textperiodcentered{} 14 Oct CPI \textperiodcentered{} 28 Oct FOMC}
-    \lasttraderow{Horizon}{Small, short dated; exit after 28 Oct if flat}
-  \end{tradeidea}%
-}{%
-  \begin{chartbox}{Chart 2}{The Fed plans to stay high for two years, then ease}%
-    {Fed funds midpoint now vs median projections. Source: FOMC Summary of Economic Projections, 16 Sep 2026.}
-    \begin{tikzpicture}
-      \begin{axis}[btschart,
-          symbolic x coords={Now,2026,2027,2028,2029,Long run}, xtick=data,
-          ymin=3.0, ymax=4.45, ytick={3.5,4.0},
-          yticklabel={\pgfmathprintnumber[fixed,precision=1,fixed zerofill]{\tick}\%},
-          nodes near coords, point meta=explicit symbolic,
-          nodes near coords style={above, font=\scriptsize\ttfamily}]
-        \addplot[dashed, line width=0.8pt, mark=*, mark size=2pt, mark options={solid}]
-          coordinates {(Now,3.875)[3.875] (2026,4.1)[4.1] (2027,4.1)[4.1]
-                       (2028,3.9)[3.9] (2029,3.6)[3.6] (Long run,3.2)[3.2]};
-        \addplot[only marks, mark=*, mark size=3pt, color=accent] coordinates {(Now,3.875)};
-      \end{axis}
-    \end{tikzpicture}
-  \end{chartbox}%
-}
-
 %% Forecasts against the forward ----------------------------------------------
 %% Forwards are calculated live from spot and policy rates with \fxforward.
 \begin{forecasts}
   \forecastrow{EUR/USD}{3 months}{1.1403}{\fxforward{1.1403}{2.50}{3.875}{0.25}}{1.1200}{\textbf{USD stronger} than the forward}
   \forecastrow{EUR/USD}{12 months}{1.1403}{\fxforward{1.1403}{2.50}{3.875}{1}}{1.1600}{In line with the forward}
-  \forecastrow{USD/JPY}{3 / 12 months}{157.25}{\fxforward[2]{157.25}{3.875}{1.25}{0.25} / \fxforward[2]{157.25}{3.875}{1.25}{1}}{[\,] / [\,]}{From the JPY page}
-  \lastforecastrow{USD/CAD}{3 / 12 months}{1.4141}{\fxforward{1.4141}{3.875}{2.25}{0.25} / \fxforward{1.4141}{3.875}{2.25}{1}}{[\,] / [\,]}{From the CAD page}
+  \lastforecastrow{DXY}{3 months}{100.97}{\fxforward[2]{100.97}{3.875}{2.3345}{0.25}}{101.80}{\textbf{USD stronger} than the forward}
 \end{forecasts}
 
-\sourcesnote{Forwards from spot and policy rates as a proxy (USD 3.875\%, EUR 2.50\%, GBP 3.75\%, CHF 0\%, SEK 1.75\%, JPY 1.25\%, CAD 2.25\%; DXY-weighted basket 2.33\%). Sources: Federal Reserve, ECB, BoE, SNB, Riksbank, BLS, BEA, CME FedWatch, CFTC, BIS/FRED, Portfolio Terminal, CNBC; data 16--28 Sep 2026. Values in [brackets] to be verified or completed. Student research for teaching purposes; not investment advice.}
+\sourcesnote{Forwards use policy rates as a proxy (USD 3.875\%, EUR 2.50\%, DXY basket 2.33\%). Sources: Fed, ECB, BLS, BEA, US Treasury, NOAA, UMich, CME, CFTC, BIS/FRED; data 16--28 Sep 2026. [Brackets]: to verify. Student research; not investment advice.}
 
 \end{document}
